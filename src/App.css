@@ -1,0 +1,150 @@
+.header-color {
+  background: #00c6ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #0072ff, #00c6ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* Landing page */
+.landing-grid {
+  background: #ECE9E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  text-align: center;
+  /* position:  fixed;  */
+  display: flex; 
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+}
+
+.profil_picture {
+  height: 350px;
+  /* padding-top: 5em;  */
+}
+
+.banner-text {
+  /* background-color:  black;  */
+  opacity: .8;
+  width: 75%; 
+  margin: auto;  
+  border-radius: 10px; 
+
+}
+
+.banner-text h1 {
+  font-size: 66px; 
+  font-weight: bold; 
+  color: #38b6ff; 
+}
+
+.banner-text hr {
+  border-top: 5px dotted white; 
+  width: 50%; 
+  margin: auto; 
+}
+
+.banner-text p {
+  color: #38b6ff; 
+  font-size: 20px; 
+  padding: 1em; 
+}
+
+.social-links {
+  display: flex; 
+  justify-content: space-between; 
+  width: 50%; 
+  margin: auto; 
+}
+
+.social-links i {
+  color: #38b6ff; 
+  font-size: 2em; 
+  padding: 8px; 
+}
+
+/* Contact page*/
+
+.contact-body {
+  margin: auto; 
+  position: fixed; 
+  width: 100%; 
+  height: 100%;
+  justify-content: center;
+  padding-top: 2em; 
+}
+
+.contact-grid {
+  text-align: center; 
+  justify-content: center; 
+  width: 80%; 
+  height: 550px;
+  background: white; 
+  color: black; 
+  margin-bottom: 20px; 
+}
+
+.contact-grid h2 {
+  font-family: 'Anton', sans-serif;  
+}
+
+.contact-grid p {
+  font-family: 'Oxygen', sans-serif; 
+  font-weight: bold; 
+}
+
+.contact-grid hr {
+  border-top: 5px dotted black; 
+  width: 50%; 
+  margin: auto; 
+}
+
+.contact-list i {
+  font-size: 66px; 
+  padding-right: 5rem; 
+
+}
+
+/* Contact page */
+
+/* Resume page*/
+
+.resume-right-col {
+  background: #00c6ff;              /* Color of the right col background*/
+  color: white; 
+  padding: 2em;
+}
+
+/* Resume page*/
+
+/* Project page*/
+
+.project-card1 {
+  width: 70%;
+  padding-left: 6rem;
+  padding-top: 1rem;
+}
+
+.project-card3 {
+  width: 70%;
+  padding-left: 6rem;
+  padding-top: 2rem; 
+}
+
+.project-card2 {
+  width: 70%;
+  padding-top: 1rem; 
+}
+
+.project-card4 {
+  width: 70%;
+  padding-top: 1.90rem;
+}
+
+.project-card1 h6 {
+  font-family: 'Oxygen', sans-serif;
+  font-size: 100%;
+  font-weight: bold;
+}
+
+/* Project page*/
