@@ -11,20 +11,20 @@ function App() {
         {/* Uses a header that scrolls with the text, rather than staying locked at the top */}
 <div className="demo-big-content">
     <Layout>
-        <Header title={<Link style={{textDecoration: 'none', color: 'white'}} to="/"> Roby Nkwamo Portfolio</Link>} className="header-color" scroll>
-            <Navigation>
-                <Link to="/resume">Resume</Link>
-                <Link to="/aboutme">About Me</Link>
-                <Link to="/work">Projects</Link>
-                <Link to="/contact">Contact</Link>
+        <Header title={<Link style={{textDecoration: 'none', color: 'white', fontFamily: 'Acme'}} to="/"> Roby Nkwamo </Link>} className="header-color" scroll>
+            <Navigation style={{fontFamily:'Josefin Slab', fontWeight:'bold', fontSize:'40px'}}>
+                <Link style={{fontFamily:'Josefin Slab', fontWeight:'bold', fontSize:'20px'}} to="/resume">Resume</Link>
+                <Link style={{fontFamily:'Josefin Slab', fontWeight:'bold', fontSize:'20px'}} to="/aboutme">About Me</Link>
+                <Link style={{fontFamily:'Josefin Slab', fontWeight:'bold', fontSize:'20px'}} to="/work">Projects</Link>
+                <Link style={{fontFamily:'Josefin Slab', fontWeight:'bold', fontSize:'20px'}} to="/contact">Contact</Link>
             </Navigation>
         </Header>
-        <Drawer title={<Link style={{textDecoration: 'none', color: 'Black'}} to="/"> Roby Nkwamo</Link>}>
-            <Navigation>
-            <Link to="/resume">Resume</Link>
-                <Link to="/aboutme">About Me</Link>
-                <Link to="/work">Projects</Link>
-                <Link to="/contact">Contact</Link>
+        <Drawer title={<Link style={{textDecoration: 'none', color: 'Black', fontFamily: 'Acme'}} to="/"> Roby Nkwamo</Link>}>
+            <Navigation style={{fontFamily:'Josefin Slab', fontWeight:'bold', fontSize:'20px'}}>
+                <Link style={{fontFamily:'Josefin Slab', fontWeight:'bold', fontSize:'20px'}} to="/resume">Resume</Link>
+                <Link style={{fontFamily:'Josefin Slab', fontWeight:'bold', fontSize:'20px'}} to="/aboutme">About Me</Link>
+                <Link style={{fontFamily:'Josefin Slab', fontWeight:'bold', fontSize:'20px'}} to="/work">Projects</Link>
+                <Link style={{fontFamily:'Josefin Slab', fontWeight:'bold', fontSize:'20px'}} to="/contact">Contact</Link>
             </Navigation>
         </Drawer>
         <Content>

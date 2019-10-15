@@ -3,159 +3,251 @@ import {Grid, Cell } from 'react-mdl';
 import Education from './education'; 
 import Experience from './experience'; 
 import Skills from './skills'; 
+import Leadership from './leadership';
+import Button from 'react-bootstrap/Button'; 
 
 
 class Resume extends Component {
+    state={
+        display: false
+    }
+
+    toggleHandler=()=> {
+        const currentStatus=this.state.display; 
+        this.setState({
+            display: !currentStatus
+        })
+    }
+
     render() {
+        let content1 = null; 
+        let content2 = null;
+        let content3 = null;
+        let content4 = null;
+        let content5 = null;
+        let content6 = null;
+        let content7 = null;
+        if(this.state.display) {
+            content1= 
+                <Skills
+                    skill1="Python"
+                    progress1={94}
+                    skill2="C++"
+                    progress2={90}
+                    skill3="Java"
+                    progress3={92}
+                />
+            content2 = 
+                <Skills
+                    skill1="React"
+                    progress1={95}
+                    skill2="Node.JS"
+                    progress2={90}
+                    skill3= "React Native"
+                    progress3={82}
+                />
+            content3 = 
+                <Skills
+                    skill1="HTML\CSS"
+                    progress1={90}
+                    skill2="JavaScript"
+                    progress2={90}
+                    skill3= "PHP"
+                    progress3={71}
+                />
+            content4 = 
+                <Skills
+                    skill1="SQLite"
+                    progress1={84}
+                    skill2="FireBase"
+                    progress2={82}
+                    skill3= "MySQL"
+                    progress3={35}
+                />
+            content5 = 
+                <Skills
+                    skill1="Computer Networking"
+                    progress1={70}
+                    skill2="CCENT Certification"
+                    progress2={65}
+                    skill3= "CCNA Certification"
+                    progress3={30}
+                />
+            content6 = 
+                <Skills
+                    skill3="Photoshop"
+                    progress3={73}
+                    skill2="AdobeXD"
+                    progress2={84}
+                    skill1= "PowerPoint"
+                    progress1={89}
+                />
+            content7 = 
+                <Skills
+                    skill1="French"
+                    progress1={99}
+                    skill2="English"
+                    progress2={92}
+                    skill3= "Spanish"
+                    progress3={10}
+                />
+        }
+        
         return(
-            <div> 
+            <div className='resume-page'> 
                 <Grid>
-                    <Cell col={4}> 
-                        <div style={{paddingLeft: '10', paddingTop: '25'}}>
+                    <Cell className='resume-left-col' col={4}> 
+                        <div className='resume-div' style={{paddingLeft: '10', paddingTop: '25'}}>
                             <img
-                                src="https://ezw2ow.dm.files.1drv.com/y4mqp7SY_JczJefKt2aJ1JXyR6_wLCzbylo7-mLtjVJt__iuZWphftb56Z0oBcv5bigZKIDLIhZQteikUUxzmYQxDp_T02cnZahyukKr_NfBUGWA4QdQhGfuUMZ7ryKc6WjlVI3L13ROdmop9_yCzFPdFdcYEiU4eBIcCWFbYdZiQ0zLyaHQlJAOhnKWbV_R8C3JuIOBv1rr_gn3IgIx0WJIw?width=500&height=500&cropmode=none"
-                                alt="avatar"
+                                src="https://r7ctow.dm.files.1drv.com/y4m7OrUyGv6TGW4meP_xgxpFAGP1kdbQUf_L45q30NThT65Gm9vM0FrTrOyO9yFxmQnQG7Pceoyqea5SXmc90pJJpz6IehRtR9XrOdkH86UjUjnMOGu7WXYlINxHGv5Jb1c7aC6vNH1CPI0s7RW2YpMT6CDOZAlv_gqk6gadYBsZVtxU1_e-X6Dv6fWvuKYGaSxwZ5UyernpI6AJd-h4KBk4g?width=917&height=1529&cropmode=none"
+                                alt="roby-pic-2"
                                 style={{height: '200px'}}
                             />
                         </div>
 
-                        <h2 style={{paddingTop: '1.75em'}}> Roby Nkwamo</h2>
-                        <h4 style={{color: 'grey'}}> Computer Engineer </h4>
-                        <hr style={{borderTop: '3px solid #e16145', width: '50%'}}/>
-                        <p>
-                            I am entrepreneur majoring in computer Engineering with minors in Electrical engineering and Cyber security. 
+                        <h2 style={{paddingTop: '1.75em', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '40px'}}> Roby Nkwamo</h2>
+                        <h4 style={{color: 'grey', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '30px'}}> Computer Engineer </h4>
+                        <hr style={{borderTop: '3px solid #ffe767', width: '50%'}}/>
+                        <p style={{fontSize: '18px'}}>
+                            I am entrepreneur majoring in computer Engineering with minors in Electrical engineering and Cyber-security. 
                             I am graduating in December 2019 and looking for opportunities to demonstrate my skills and expand my knowledge 
                             across the various areas of computer Engineering specifically in the area of Cyber Security and web development. 
                             I aspire to use the skills and knowledge that I have acquired so far to develop ideas and applications 
                             that makes the world a better place. 
                         </p>
-                        <hr style={{borderTop: '3px solid #e16145', width: '50%'}}/>
-                        <h5>Address</h5>
-                        <p> 14515 Briar Forest Dr, Apt 1624, Houston, Texas, 77077.</p>
-                        <h5>Phone</h5>
-                        <p> (832) 462-9808</p>
-                        <h5>Email</h5>
-                        <p> nkwamoroby@gmail.com</p>
-                        <h5>Web</h5>
-                        <p>www.robynkwamo.com</p>
-                        <hr style={{borderTop: '3px solid #e16145', width: '50%'}}/>
+                        <hr style={{borderTop: '3px solid #ffe767', width: '50%'}}/>
+                        <h5 style={{fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '30px'}}>Address</h5>
+                        <p style={{fontSize: '18px'}}> Please Email or call me for my address</p>
+                        <h5 style={{fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '30px'}}>Phone</h5>
+                        <p style={{fontSize: '18px'}}> <a href="tel:+1832-462-9808" style={{color: '#000000'}}> (832) 462-9808 </a></p>
+                        <h5 style={{fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '30px'}}>Email</h5>
+                        <p style={{fontSize: '18px'}}> <a href="mailto:nkwamoroby@gmail.com" style={{color: '#000000'}}> nkwamoroby@gmail.com </a> </p>
+                        <h5 style={{fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '30px'}}>Web</h5>
+                        <p style={{fontSize: '18px'}}> <a href="https://robynkwamo.com" style={{color: '#000000'}}> www.robynkwamo.com </a></p>
+                        <hr style={{borderTop: '3px solid #ffe767', width: '50%'}}/>
                     </Cell>
                     <Cell className="resume-right-col" col={8}> 
-                        <h2>Education</h2>
-
+                        <h2 style={{color: 'white', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '40px'}}>Education</h2>
 
                         <Education
                             startYear = {"August 2016"}
                             endYear={"December 2019"}
-                            schoolName="Texas A&M University"
-                            schoolDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                                when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                            schoolName="Texas A&M University, College Station, Texas"
+                            schoolDescription1=" Bachelor of Science in Computer Engineering"
+                            schoolDescription2=" Minor in Cybersecurity"
+                            schoolDescription3=" Minor in Electrical Engineering" 
                         />
 
-                        <hr style={{borderTop: '3px solid #e16145'}} />
+                        <hr style={{borderTop: '3px solid #ffe767'}} />
 
-                        <h2>Experience</h2>
+                        <h2 style={{color: 'white', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '40px'}}>Experience</h2>
+
+                        <Experience 
+                            startYear={"January 2019"}
+                            endYear={"Present"}
+                            jobPlace={"Captsone Project"}
+                            jobName={"Backend programmer"}
+                            jobDescription1="- Collaborate in a team of 4 to design an AI algorithm for a system that is used to reduce power consumption 
+                                               in an IOT enable house with solar panel as energy source"
+                            jobDescription2="- Use python 3.0 to program the decision mecanism of the system based on the data receive by all the 
+                                               smart censors and accessories installed in the house."
+                        />
 
                         <Experience 
                             startYear={"August 2017"}
                             endYear={"Present"}
+                            jobPlace={"Distance Learning Education for College of  Engineering at Texas A&M University"}
                             jobName={"Courses Designer Assistant"}
-                            jobDescription="- Collaborate as a student assistant in a team of 8
-                                            - Help creating structure and design interactive app 
-                                              and content for online courses
-                                            - Aided in the recording and live streaming process
-                                              of conferences and educationals events"
-                        />
-
-                        <Experience 
-                            startYear={"March 2018"}
-                            endYear={"Present"}
-                            jobName={"Project Lead"}
-                            jobDescription="- Collaborate as a student assistant in a team of 8
-                                            - Help creating structure and design interactive app 
-                                              and content for online courses
-                                            - Aided in the recording and live streaming process
-                                              of conferences and educationals events"
+                            jobDescription1="- Collaborate as a student assistant in a team"
+                            jobDescription2="- Help creating structure and interactive content for online courses"
+                            jobDescription3="- Help in the recording and live streaming process of courses and 
+                                               school related events"
                         />  
 
                         <Experience 
-                            startYear={"August 2017"}
-                            endYear={"Present"}
-                            jobName={"Courses Designer Assistant"}
-                            jobDescription="- Collaborate as a student assistant in a team of 8
-                                            - Help creating structure and design interactive app 
-                                              and content for online courses
-                                            - Aided in the recording and live streaming process
-                                              of conferences and educationals events"
-                        />
+                            startYear={"September 2018"}
+                            endYear={"May 2019"}
+                            jobPlace={"Engineering Incubator Program at the department of Entrepreneurship"}
+                            jobName={"Team Leader"}
+                            jobDescription1="- Collaborate in a team of 3 people to design a platform to help householder with  
+                                               house reparations schedule and work process"
+                            jobDescription2="- Used androidstudio and java to develop the first app prototype"
+                            jobDescription3="- Gained experience in customer service by talking to potential customers"
+                        />              
 
                         <Experience 
-                            startYear={"August 2017"}
+                            startYear={"May 2017"}
                             endYear={"Present"}
-                            jobName={"Courses Designer Assistant"}
-                            jobDescription="- Collaborate as a student assistant in a team of 8
-                                            - Help creating structure and design interactive app 
-                                              and content for online courses
-                                            - Aided in the recording and live streaming process
-                                              of conferences and educationals events"
+                            jobPlace={"WineEmpire & Co"}
+                            jobName={"Founder and Co-Owner"}
+                            jobDescription1="- Founded a local service company in Cameroon in charge of catering and delivering beverages to people  
+                                               in most part of the country"
+                            jobDescription2="- Designed and in charge of the maintenance of the e-commerce website www.wineempire.store"
+                            jobDescription3="- Customer service representant for non cameroonian resisdent and other bussiness related inquiries "
                         />
 
-                        <hr style={{borderTop: '3px solid #e16145'}} />
+                        <hr style={{borderTop: '3px solid #ffe767'}} />
 
-                        <h2>Skills</h2>
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
-                            <Skills
-                                skill="javascript"
-                                progress={95}
-                            />
+                        <h2 style={{color: 'white', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '40px'}}>Leadership</h2>
+
+                        <Leadership
+                            startYear={"Fall 2017"}
+                            endYear={"Fall 2018"}
+                            leadershipPlace={"Texas A&M IEEE"}
+                            leadershipDescription1="- Active Member of the organisation"
+                        />
+
+                        <Leadership
+                            startYear={"Fall 2016"}
+                            endYear={"Spring 2017"}
+                            leadershipPlace={"Texas A&M Cybersecurity Club"}
+                            leadershipDescription1="- Active Member and led the club in different cybersecurity competitions during
+                                                     Fall 2016 and Spring 2017"
+                        />
+
+                        <hr style={{borderTop: '3px solid #ffe767'}} />
+
+                        <h2 style={{color: 'white', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '40px'}}>Skills</h2>
+
+                                <Button style={{color: 'black', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '20px', paddingLeft: '2.5rem', paddingRight: '2.5rem'}} onClick={this.toggleHandler}> Languages </Button>
+                                {content1}
+                                <Button style={{color: 'black', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '20px', marginLeft: '2rem', paddingLeft: '1.5rem', paddingRight: '1.5rem'}} onClick={this.toggleHandler}> Frameworks </Button>
+                                {content2}
+                                <Button style={{color: 'black', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '20px', marginLeft: '2rem'}} onClick={this.toggleHandler}> Web development </Button>
+                                {content3}
+                                <Button style={{color: 'black', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '20px', marginLeft: '2rem', paddingLeft: '2.5rem', paddingRight: '2.5rem'}} onClick={this.toggleHandler}> DataBases </Button>
+                                {content4}
+                                <Button style={{color: 'black', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '20px', marginLeft: '3.5rem', paddingLeft: '2.5rem', paddingRight: '2.5rem'}} onClick={this.toggleHandler}> Cybersecurity </Button>
+                                {content5}
+                                <Button style={{color: 'black', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '20px', marginLeft: '4rem', paddingLeft: '3rem', paddingRight: '3rem'}} onClick={this.toggleHandler}> Design </Button>
+                                {content6}
+                                <Button style={{color: 'black', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '20px', marginLeft: '4rem', paddingLeft: '3rem', paddingRight: '3rem'}} onClick={this.toggleHandler}> Others </Button>
+                                {content7}
+
+                        <hr style={{borderTop: '3px solid #ffe767'}} />
+
+                        <h2 style={{color: 'white', fontFamily: 'Josefin Slab', fontWeight: 'bold', fontSize: '40px'}}>Some Important Courses</h2>
+                            <p style={{color: 'white', fontFamily: 'Acme', fontSize: '15px'}}>
+                                <p><a style={{color: 'white'}} href='http://courses.cse.tamu.edu/keyser/csce121/'>CSCE 121:INTRO TO PROGRAM DESIGN AND CONCEPTS </a></p>
+                                <p><a style={{color: 'white'}} href='http://courses.cs.tamu.edu/teresa/csce221/csce221-index.html'>CSCE 221:DATA STRUCTURES AND ALGORITHMS </a> </p>
+                                <p><a style={{color: 'white'}} href='http://faculty.cs.tamu.edu/shsze/courses/spring17/'>CSCE 222:DISCRETE STRUCTURES FOR COMPUTING </a> </p>
+                                <p><a style={{color: 'white'}} href='http://faculty.cse.tamu.edu/tanzir/sp19/313/'>CSCE 313:INTRO TO COMPUTER SYSTEM </a> </p>
+                                <p><a style={{color: 'white'}} href='http://faculty.cse.tamu.edu/tanzir/sp19/315/'>CSCE 315:PROGRAMMING STUDIO </a> </p>
+                                <p><a style={{color: 'white'}} href='http://courses.cse.tamu.edu/guofei/csce465/'>CSCE 465:COMPUTER AND NETWORK SECURITY </a> </p>
+                                <p><a style={{color: 'white'}} href='https://engineering.tamu.edu/electrical/academics/degrees/graduate/phd-qualifying-exams/ecen214.html'>ECEN 214:ELECTRONIC CIRCUIT THEORY </a> </p>
+                                <p><a style={{color: 'white'}} href='https://compass-ssb.tamu.edu/pls/PROD/bwykfupd.p_showdoc?doctype_in=SY&crn_in=34530&termcode_in=201831'>ECEN 248:INTRO TO DIGITAL SYSTEM DESIGN </a> </p>
+                                <p><a style={{color: 'white'}} href='https://engineering.tamu.edu/electrical/academics/degrees/graduate/phd-qualifying-exams/ecen314.html'>ECEN 314:SIGNALS AND SYSTEMS </a> </p>
+                                <p><a style={{color: 'white'}} href='http://www.ece.tamu.edu/~spalermo/ecen325.html'>ECEN 325:ELECTRONICS </a> </p>
+                                <p><a style={{color: 'white'}} href='https://cesg.tamu.edu/courses/ecen-350-computer-architecture-and-design-spring-2019/'>ECEN 350:COMPUTER ARCHITECTURE & DESIGN </a> </p>
+                                <p><a style={{color: 'white'}} href='https://cesg.tamu.edu/courses/ecen-424-fundamentals-of-networking/'>ECEN 424:FUNDAMENTALS OF NETWORKING </a> </p>
+                                <p><a style={{color: 'white'}} href='http://ece.tamu.edu/~sunilkhatri/courses/ee449/'>ECEN 449:MICROPROCESSOR SYSTEM DESIGN </a> </p>
+                                <p><a style={{color: 'white'}} href='http://ece.tamu.edu/~jyyz/ecen454.html'>ECEN 454:DIGITAL INTEGRAL CIRCUIT DESIGN </a> </p>
+                                <p><a style={{color: 'white'}} href='https://cesg.tamu.edu/courses/ecen-489-mob-apps-android/'>ECEN 489:MOBILE APP ANDROID </a> </p>
+                                <p><a style={{color: 'white'}} href='https://www.tamu.edu'>ECEN 489:SECURITY EMBEDDED SYSTEM  </a> </p>
+                                <p><a style={{color: 'white'}} href='https://engineering.tamu.edu/student-life/eep/courses.html'>ENGR 462:ENGINEERING ENTREPRENEURSHIP HOUR </a> </p>
+                                <p><a style={{color: 'white'}} href='https://core.tamu.edu/pdf/ENGR%20482-Syllabus.pdf'>ENGR 482:ETHICS AND ENGINEERING </a> </p>
+                                <p><a style={{color: 'white'}} href='https://www.math.tamu.edu/courses/math311/'>MATH 311:TOPICS IN APPLIED MATHEMATICS I </a> </p>
+                            </p>
 
                     </Cell>
                 </Grid>

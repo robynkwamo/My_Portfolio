@@ -6,9 +6,9 @@
 
 /* Landing page */
 .landing-grid {
-  background: #ECE9E6;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #d9d9d9;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #d9d9d9, #d9d9d9);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #FFFFFF, #d9d9d9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   text-align: center;
   /* position:  fixed;  */
   display: flex; 
@@ -20,13 +20,12 @@
 
 .profil_picture {
   height: 350px;
-  /* padding-top: 5em;  */
 }
 
 .banner-text {
-  /* background-color:  black;  */
+  
   opacity: .8;
-  width: 75%; 
+  width: 50%; 
   margin: auto;  
   border-radius: 10px; 
 
@@ -35,7 +34,7 @@
 .banner-text h1 {
   font-size: 66px; 
   font-weight: bold; 
-  color: #38b6ff; 
+  color: #000000; 
 }
 
 .banner-text hr {
@@ -45,9 +44,10 @@
 }
 
 .banner-text p {
-  color: #38b6ff; 
+  color: #000000; 
+  font-family: 'Josefin Slab', serif;
   font-size: 20px; 
-  padding: 1em; 
+  font-weight: bold;
 }
 
 .social-links {
@@ -60,64 +60,81 @@
 .social-links i {
   color: #38b6ff; 
   font-size: 2em; 
-  padding: 8px; 
+  padding: 4px; 
 }
-
-/* Contact page*/
-
-.contact-body {
-  margin: auto; 
-  position: fixed; 
-  width: 100%; 
-  height: 100%;
-  justify-content: center;
-  padding-top: 2em; 
-}
-
-.contact-grid {
-  text-align: center; 
-  justify-content: center; 
-  width: 80%; 
-  height: 550px;
-  background: white; 
-  color: black; 
-  margin-bottom: 20px; 
-}
-
-.contact-grid h2 {
-  font-family: 'Anton', sans-serif;  
-}
-
-.contact-grid p {
-  font-family: 'Oxygen', sans-serif; 
-  font-weight: bold; 
-}
-
-.contact-grid hr {
-  border-top: 5px dotted black; 
-  width: 50%; 
-  margin: auto; 
-}
-
-.contact-list i {
-  font-size: 66px; 
-  padding-right: 5rem; 
-
-}
-
-/* Contact page */
 
 /* Resume page*/
 
+.resume-page {
+  background: #d9d9d9;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #d9d9d9, #d9d9d9);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #FFFFFF, #d9d9d9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family:  'Josefin Slab', serif;
+  font-weight: 'bold';
+  font-size: '40px';
+}
+
 .resume-right-col {
-  background: #00c6ff;              /* Color of the right col background*/
+  background: #00c6ff;               /* Color of the right col background*/
   color: white; 
   padding: 2em;
 }
 
+.resume-left-col {             
+  color: black;
+}
+
+/* .resume-div p {
+  font-family:  'Josefin Slab', serif;
+  font-weight: 'bold';
+} */
+
 /* Resume page*/
 
+/* About Me*/
+
+.aboutMe-page {
+  background: #d9d9d9;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #d9d9d9, #d9d9d9);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #FFFFFF, #d9d9d9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.aboutMe-cell {
+  font-family: 'Acme', sans-serif;
+  padding-left: 10rem;
+  text-align: center;
+}
+
+.aboutMe-page h1 {
+  font-family: 'Tangerine', cursive;
+  font-weight: bold;
+  text-align: center;
+  padding-left: 20rem;
+}
+
+.aboutMe-para1 {
+  font-family:  'Josefin Slab', serif;
+  font-size: 40%;
+  width: 100%;
+  font-weight: bold;
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
+/* About Me*/
+
 /* Project page*/
+
+.project-page {
+  background: #d9d9d9;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #d9d9d9, #d9d9d9);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #FFFFFF, #d9d9d9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 100%;
+  width: 100%;
+}
 
 .project-card1 {
   width: 70%;
@@ -142,9 +159,64 @@
 }
 
 .project-card1 h6 {
-  font-family: 'Oxygen', sans-serif;
-  font-size: 100%;
-  font-weight: bold;
+  font-size: 120%;
+  font-family: 'Josefin Slab', serif;
+}
+
+.project-card2 h6 {
+  font-size: 110%;
+  font-family: 'Josefin Slab', serif;
 }
 
 /* Project page*/
+
+/* Contact page*/
+
+.contact-body {
+  background: #d9d9d9;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #d9d9d9, #d9d9d9);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #FFFFFF, #d9d9d9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  margin: auto; 
+  width: 100%; 
+  height: 100%;
+  justify-content: center;
+}
+
+.contact-grid {
+  text-align: center; 
+  justify-content: center; 
+  width: 80%; 
+  height: 550px;
+  background: white; 
+  color: #1794ce; 
+  margin-bottom: 20px; 
+}
+
+.contact-grid h2 {
+  font-family: 'Josefin Slab', serif;
+  color: #ffe767; 
+  right: '2em' ;
+}
+
+.contact-grid p {
+  font-family: 'Josefin Slab', serif;;
+  font-weight: bold; 
+}
+
+.contact-grid hr {
+  border-top: 5px dotted #ffe767; 
+  width: 50%; 
+  margin: auto; 
+}
+
+.contact-list i {
+  font-size: 66px; 
+  padding-right: 5rem; 
+}
+
+.contact-list a {
+  font-family: 'Josefin Slab', serif;
+  font-weight: bold; 
+}
+
+/* Contact page */
