@@ -9,7 +9,7 @@ class Contacts extends Component {
                     <Cell col={6}>
                         {/* <h2>Roby Nkwamo</h2> */}
                         <img
-                            src="https://r7ctow.dm.files.1drv.com/y4m7OrUyGv6TGW4meP_xgxpFAGP1kdbQUf_L45q30NThT65Gm9vM0FrTrOyO9yFxmQnQG7Pceoyqea5SXmc90pJJpz6IehRtR9XrOdkH86UjUjnMOGu7WXYlINxHGv5Jb1c7aC6vNH1CPI0s7RW2YpMT6CDOZAlv_gqk6gadYBsZVtxU1_e-X6Dv6fWvuKYGaSxwZ5UyernpI6AJd-h4KBk4g?width=917&height=1529&cropmode=none"
+                            src="https://r7crow.dm.files.1drv.com/y4mGEAgO7ze6qgP2vyCycchYjYQ45LKnQ0ituWQoLxKg8qenaNY1oAD4v6fmEgaA6AviqynzSHQ96_eopleL56I4ZRVdchSpQWEuGnmb13MNkbt9BTd4P-JNSxB9BZa9AZbSz-IB8qd3HAMHpWEjUBcpygJ5zmDMTmx0LOQ2EO-Qn8I6SKy7W3-RO1rw72nfAF-Jn6jugj1wXn1Y8Pi0KdSPg?width=500&height=500&cropmode=none"
                             alt="roby-pic"
                             style={{height: '250px', paddingTop: '2em'}}
                         />
