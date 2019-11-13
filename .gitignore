@@ -21,3 +21,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+build/asset-manifest.json
+build/index.html
+build/service-worker.js
+build/static/js/runtime~main.a8a9905a.js
+public/_redirects
+public/index.html
+build/asset-manifest.json
+build/index.html
+build/service-worker.js
+build/static/js/runtime~main.a8a9905a.js
+public/index.html
