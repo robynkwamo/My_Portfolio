@@ -8,7 +8,7 @@ class Landing extends Component {
                 <Grid className = "landing-grid">
                     <Cell col={12}>
                         <img 
-                            src= "https://fdwzow.dm.files.1drv.com/y4m051q3R3P-xF2TcEQgdSR8rhhd4gCtW9ysTJIBl850-fCWK9DHpvaLDrQQok2t15FJNn_oQlk0xpxuVw7_xkhSr7FmmSLd8RB3lcazu5zqhxx0HEVI0Npc4UoFYWbbvNGcpltOvTgr1FFEFKs1mlQXFLyPm6IX4vEDaI7DDaSE0GHcJT3wiURJhOrh5vFqB9iK_L641ikUqe5XaPEBzfGAQ?width=1350&height=650&cropmode=none" 
+                            src = "https://fdwzow.dm.files.1drv.com/y4m051q3R3P-xF2TcEQgdSR8rhhd4gCtW9ysTJIBl850-fCWK9DHpvaLDrQQok2t15FJNn_oQlk0xpxuVw7_xkhSr7FmmSLd8RB3lcazu5zqhxx0HEVI0Npc4UoFYWbbvNGcpltOvTgr1FFEFKs1mlQXFLyPm6IX4vEDaI7DDaSE0GHcJT3wiURJhOrh5vFqB9iK_L641ikUqe5XaPEBzfGAQ?width=1350&height=650&cropmode=none" 
                             alt = "robypic"
                             className = "profil_picture"
                         />

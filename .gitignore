@@ -32,3 +32,11 @@ build/index.html
 build/service-worker.js
 build/static/js/runtime~main.a8a9905a.js
 public/index.html
+src/App.js
+src/App.test.js
+src/components/contact.js
+src/components/landingpage.js
+src/components/resume.js
+src/index.css
+src/index.js
+src/serviceWorker.js
