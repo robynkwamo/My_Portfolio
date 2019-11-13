@@ -1,5 +1,8 @@
 import React, { Component } from 'react'; 
-import {Grid, Cell, List, ListItem, ListItemContent } from 'react-mdl'
+import {Grid, Cell, List, ListItem, ListItemContent } from 'react-mdl'; 
+import { hotjar } from 'react-hotjar';
+
+hotjar.initialize(1568765, 6);
 
 class Contacts extends Component {
     render() {

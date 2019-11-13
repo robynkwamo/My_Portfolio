@@ -1,5 +1,8 @@
 import React, { Component } from 'react'; 
 import {Grid, Cell, Card, CardText, CardTitle, CardActions, Button, CardMenu, IconButton } from 'react-mdl';
+import { hotjar } from 'react-hotjar';
+
+hotjar.initialize(1568765, 6);
 
 class Work extends Component {
     render() {
