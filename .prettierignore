@@ -1,0 +1,6 @@
+node_modules/**
+.github/**
+.husky/**
+
+
+# Ignore all JS files:
