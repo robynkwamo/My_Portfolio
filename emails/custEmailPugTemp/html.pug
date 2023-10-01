@@ -1,0 +1,98 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300&family=Playfair+Display&display=swap")
+    title LSU Customer Email
+    style.
+      body {
+        font-family: "Lato", sans-serif;
+        font-family: "Playfair Display", serif;
+        background-color: white;
+        font-size: 19px;
+        max-width: 1354px;
+        max-height: 1366px;
+        margin: 0 auto;
+      }
+      .header1 {
+        align-content: center;
+        padding: 30px;
+      }
+      .hr1 {
+        height: 1px;
+        background-color: #c9c9c9;
+      }
+      .hr2 {
+        height: 1px;
+        background-color: #c9c9c9;
+        width: 50%;
+        margin: 0% auto;
+      }
+      .footer1 {
+        background-color: #16428f;
+        height: 120px;
+        align-items: center;
+      }
+      .row {
+        display: table;
+        clear: both;
+        content: '';
+        margin-top:10px;
+        justify-content: space-between;
+        font-size: small;
+        align-content: center;
+        color: white;
+      }
+      .column {
+        float: left;
+        align-items: center;
+        font-size: medium;
+        padding: 10px;
+        justify-items: auto;
+      }
+      .footerContainer {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr 1fr);
+        justify-items: auto;
+        justify-content: space-around
+      }
+      #wrapper {
+        background-color: white;
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        padding: 1%;
+        align-items: center;
+      }
+  body
+    #wrapper
+      header.header1
+        #logo(align='center')
+          img(src="https://bnz05pap002files.storage.live.com/y4m4N1faf3mOlP7e1eI18ge6P49NULZO_SC9WD_GrFT6QURIqC3XbZZij3OI2ffxrEK5F0BpdFchTau8o3rqYgmNS1l1HpaMtJufhFNNF7g3_NGeFriTQgzSRBIGAxxcgNj2HfGad_XXYqK-jPd8BhdFoBTymJIpyhKTwU0mmXjv38rydvL1h9QJyh3w8JiDbD5?width=1024&height=1024&cropmode=none" alt='' height='500%' width='40%')
+      hr.hr1
+      br
+      .one-col(align='center')
+        h1 Votre Demande De Contact a été Reçue!
+        hr.hr2
+        p
+          | Salut 
+          b #{name}
+          | , Votre Requête a bien été reçue par
+          |           LSU.
+        p
+          | Nous vous contacterons pour plus d'informations dans de brefs delais.
+        p Merci de votre considération
+        br
+        footer.footer1
+          .footerContainer
+            .row
+              .column
+                img(src="https://img.icons8.com/ios-glyphs/30/ffffff/phone--v1.png", alt="location" style="max-height: 24px; max-width: 20px; color: white;")
+                |                 (650) - 203 - 6699
+              .column
+                img(src="https://img.icons8.com/material-sharp/24/ffffff/marker.png", alt="location" style="max-height: 24px; max-width: 20px; color: white;")
+                |                 Houston, Texas, USA
+            .row
+              a(href='https://www.letservu.com/contactus' style='color: white')
+                | Designed and Powered by LSUTech

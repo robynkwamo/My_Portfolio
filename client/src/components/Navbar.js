@@ -67,7 +67,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-const navbar = ({ children }) => {
+const Navbar = ({ children }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -169,4 +169,4 @@ const navbar = ({ children }) => {
   );
 };
 
-export default navbar;
+export default Navbar;

@@ -12,12 +12,15 @@ const xss = require('xss-clean');
 const OpenApiValidator = require('express-openapi-validator');
 const url = require('whatwg-url');
 const path = require('path');
+const { createHandler } = require('graphql-http/lib/use/express');
+const fileUpload = require('express-fileupload');
+
+let graphqlSchema = require('./schemas/index');
 
 if (process.env.NODE_ENV === undefined) {
   require('dotenv').config();
 }
 
-const proxyData = url.basicURLParse(process.env.REDIS_URL);
 const config = require('./keys');
 
 const app = express();
@@ -58,6 +61,7 @@ app.enable('trust proxy');
 app.use(express.json({ limit: '10kb' }));
 // Data Sanitization against XSS attacks
 app.use(xss());
+app.use(fileUpload());
 
 // Another bunch of middleswares to authenticate http requests
 // Sanitizing data to prevent code injection attacks
@@ -142,9 +146,6 @@ connection.on('error', (err) => {
   log.error('Mongo Connection error:', err);
 });
 
-// const homePageContents = require("./routes/generalRoutes/homePageContents.route");
-// app.use("/api/homePageContents", homePageContents);
-
 if (process.env.NODE_ENV === 'production') {
   //Express will serve up production assets
   //like our main.js file, or main.css file !
@@ -156,6 +157,40 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
   });
 }
+
+app.use('/', (req, res, next) => {
+  try {
+    log.info('------- Request Coming From -------', req?.headers?.host);
+    const regex = /\/(api|graphql)\b/i;
+    if (regex.test(req.url)) {
+      log.info('------- Sending to request to internal api ----------');
+      next();
+    } else {
+      const check = {
+        uptime: process.uptime(),
+        responseTime: process.hrtime(),
+        message: 'OK',
+        timestamp: Date.now(),
+      };
+      return res.status(200).send(check);
+    }
+  } catch (error) {
+    log.error('Error With the Home endpoint', error);
+  }
+});
+
+app.all('/graphql', (req, res, next) => {
+  createHandler({ schema: graphqlSchema, context: { startTime: Date.now(), request: req }, extensions })(
+    req,
+    res,
+    next
+  );
+});
+
+app.use(fileUpload());
+
+const guestUpload = require('./routes/guestUpload.route');
+app.use('/api/guest/', guestUpload);
 
 // Handle error
 process
