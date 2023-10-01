@@ -13,7 +13,7 @@
     "dev": "concurrently \"nodemon server.js\" \"npm run frontend\"",
     "devProd": "NODE_ENV=production concurrently \"nodemon server.js\" \"npm run frontendProd\"",
     "build:deploy": "cross-env NODE_ENV=production webpack",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install --only=dev --force && npm install --force && npm run build"
   },
   "keywords": [],
   "author": "",
