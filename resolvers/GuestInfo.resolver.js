@@ -1,0 +1,312 @@
+const { EventInfoSchema } = require('../models/eventInfo.model');
+const { GuestInfoSchema, GuestInfoTC } = require('../models/guestInfo.model');
+const { MessageTC } = require('../models/sms.model');
+
+const log = require('../utils/serverLog');
+
+async function sendRSVEvent(firstName, lastName, phoneNumber, isConfirmed) {
+  if (!firstName || !message || !isConfirmed) {
+    return false;
+  }
+  const isEmailSent = sendEmail(firstName, lastName, phoneNumber, isConfirmed);
+  if (isEmailSent) {
+    return true;
+  }
+  return false;
+}
+
+const guestInfoCreateOne = GuestInfoTC.addResolver({
+  name: 'createOne',
+  kind: 'mutation',
+  type: 'Boolean',
+  args: {
+    firstName: 'String!',
+    lastName: 'String!',
+    phoneNumber: 'String!',
+    isAttending: 'Boolean',
+    canHavePlusOne: 'Boolean',
+    hasPlusOne: 'Boolean',
+    eventId: 'ID!',
+  },
+  resolve: async ({ args }) => {
+    try {
+      // Create a new guest Object based on the mongo schema
+      const { firstName, lastName, phoneNumber, isAttending, canHavePlusOne, hasPlusOne, eventId } = args;
+
+      const newGuest = new GuestInfoSchema({
+        firstName,
+        lastName,
+        phoneNumber,
+        isAttending,
+        canHavePlusOne,
+        hasPlusOne,
+        eventId,
+      });
+
+      const session = await GuestInfoSchema.startSession();
+      const transactionOptions = {
+        readPreference: 'primary',
+        readConcern: { level: 'local' },
+        writeConcern: { w: 'majority' },
+      };
+      const tranRes = await session.withTransaction(async () => {
+        const guestCreated = await newGuest
+          .save({ session })
+          .then(async (doc) => {
+            log.info(`${firstName} has been saved successfully with ID ${doc._id}`);
+            if (doc?._id) {
+              return true;
+            }
+            return false;
+          })
+          .catch((err) => {
+            log.error(`There was an issue saving ${firstName}'s guest with the following error: ${err}`);
+            return false;
+          });
+        if (!guestCreated) {
+          await session.abortTransaction();
+          return new Error('Due To Some Error With Information, Aborting guest Creation... ');
+        }
+      }, transactionOptions);
+      await session.endSession();
+      if (tranRes) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      log.error(`Error while creating new guest ${error.message}`);
+      return error;
+    }
+  },
+});
+
+const guestInfoCreateMany = GuestInfoTC.addResolver({
+  name: 'createMany',
+  kind: 'mutation',
+  type: 'Boolean',
+  args: {
+    guests: '[JSON]!',
+    eventId: 'ID!',
+  },
+  resolve: async ({ args }) => {
+    try {
+      // Create a new guest Object based on the mongo schema
+      const { guests, eventId } = args;
+
+      const guestsInfo = guests.map((guest) => {
+        return {
+          ...guest,
+          eventId,
+        };
+      });
+
+      //Check if guest already exist
+      const existingGuests = [];
+
+      for (const obj of guestsInfo) {
+        const existingDocument = await GuestInfoSchema.findOne({
+          eventId,
+          phoneNumber: obj.phoneNumber,
+        });
+
+        if (existingDocument) {
+          existingGuests.push(obj);
+        }
+      }
+
+      if (existingGuests.length === 0) {
+        return GuestInfoSchema.insertMany(guestsInfo, (error, doc) => {
+          log.info(`${guests[i].firstName} has been saved successfully with ID ${doc._id}`);
+
+          if (error) {
+            log.error(`There was an issue saving ${guests[i].firstName}: ${err}`);
+            return new Error(err.message);
+          } else {
+            console.log('Successfully inserted documents:', documents);
+            return doc;
+          }
+        });
+      } else {
+        log.info('Guest with same info already exist');
+        return {
+          message: 'Some guests with same info already exist',
+          existingGuests,
+        };
+      }
+    } catch (error) {
+      log.error(`Error while creating new guest ${error.message}`);
+      return error;
+    }
+  },
+});
+
+// Update guest by phoneNumber
+const guestUpdateById = GuestInfoTC.addResolver({
+  name: 'updateGuest',
+  kind: 'query',
+  type: 'Boolean',
+  args: {
+    phoneNumber: 'String!',
+    updatedField: '[JSON]!',
+  },
+  resolve: async ({ args }) => {
+    try {
+      const { phoneNumber, updatedField } = args;
+      const allowedFields = ['phoneNumber'];
+      updatedField.forEach((field) => {
+        for (const key in field) {
+          if (!allowedFields.includes(key)) {
+            return new Error(`Invalid Field: ${key}`);
+          }
+        }
+      });
+      const session = await GuestInfoSchema.startSession();
+      const transactionOptions = {
+        readPreference: 'primary',
+        readConcern: { level: 'local' },
+        writeConcern: { w: 'majority' },
+      };
+      const transRes = await session.withTransaction(async () => {
+        const myQuery = {
+          phoneNumber,
+        };
+        const updateArray = [];
+        // Creating the update array to update all the fields at once
+        for (let index = 0; index < updatedField.length; index += 1) {
+          // first object to update
+          const field = updatedField[index];
+          for (const key in field) {
+            if (Object.prototype.hasOwnProperty.call(field, key)) {
+              const myUpdate = {
+                $set: { [key]: field[key] },
+              };
+              updateArray.push(myUpdate);
+            }
+          }
+        }
+        const isUpdated = await GuestInfoSchema.updateOne(myQuery, updateArray, {
+          session,
+        })
+          .then(async (doc) => {
+            log.info('guestInfo Updated', doc.acknowledged);
+            // await sendRSVEvent('', '', phoneNumber, updatedField.isAttending);
+            return true;
+          })
+          .catch((err) => {
+            log.error(`ERROR CAUGHT ${err}`);
+            return false;
+          });
+        log.info('THIS IS THE UPDATED DOC', isUpdated);
+        if (!isUpdated) {
+          log.info('INFO NOT UPDATED ABORTTING');
+          await session.abortTransaction();
+        }
+      }, transactionOptions);
+      await session.endSession();
+      if (transRes) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      log.error(`Error while trying to save guestInfo ${error}`);
+      return error;
+    }
+  },
+});
+
+// Get an guest details
+const guestInfoById = GuestInfoTC.addResolver({
+  name: 'findById',
+  kind: 'query',
+  type: GuestInfoTC,
+  args: {
+    phoneNumber: 'String!',
+  },
+  resolve: async ({ args }) => {
+    try {
+      // Get the details of an guests
+      const { phoneNumber } = args;
+      const myQuery = {
+        phoneNumber,
+        isDeleted: false,
+      };
+
+      const guest = GuestInfoSchema.find(myQuery)
+        .then(async (doc) => doc[0])
+        .catch((err) => {
+          log.error('Error getting guest Info', err);
+          return new Error(err);
+        });
+
+      return guest;
+    } catch (error) {
+      log.error(`Error while creating new guest ${error.message}`);
+      return error;
+    }
+  },
+});
+
+// Send message update
+const guestSendMsgToAll = MessageTC.addResolver({
+  name: 'sendUpdateToAllGuest',
+  kind: 'mutation',
+  type: MessageTC,
+  args: {
+    eventId: 'ID!',
+    messageType: 'String!',
+  },
+  resolve: async ({ args }) => {
+    try {
+      // Get the details of an guests
+      const { sendMessage } = require('../functions/sms');
+      const { eventId, messageType } = args;
+      const myQuery = {
+        eventId,
+        isDeleted: false,
+      };
+
+      await GuestInfoSchema.find(myQuery)
+        .then(async (doc) => {
+          console.log({ doc });
+          let guestList = doc;
+
+          await EventInfoSchema.find({ _id: eventId }).then(async (doc) => {
+            console.log({ doc });
+            const eventInfo = doc[0];
+
+            if (messageType === 'Invitation') {
+              for (let i = 0, j = guestList.length; i < j; i++) {
+                const websiteLink = `https://nkwamo.com/${eventInfo.slug}`;
+                const flyerImg =
+                  'https://res.cloudinary.com/dov6k0l17/image/upload/v1696117279/Brown_Teddy_Bear_Illustrated_Baby_Shower_Invitation_l4zkdt.jpg';
+                const msgToSend = `Hi ${guestList[i].firstName}, you're invited to ${eventInfo.eventName}. Please confirm you presence here: ${websiteLink}`;
+
+                sendMessage(guestList[i].phoneNumber, msgToSend, flyerImg);
+              }
+            } else if (messageType === 'AddressUpdate') {
+              guestList = guestList.filter((guest) => guest.isAttending === true);
+              console.log({ guestList });
+              const { eventLocation } = eventInfo;
+              const { addressLine1, addressLine2, city, state, zipCode } = eventLocation;
+              const eventAddress = `${addressLine1}, ${city}, ${state}, ${zipCode}`;
+              for (let i = 0, j = guestList.length; i < j; i++) {
+                const msgToSend = `Hi ${guestList[i].firstName}, thank you for coming to ${eventInfo.eventName}. Here is the address ${eventAddress} and we hope to see you there by 3pm.`;
+                sendMessage(guestList[i].phoneNumber, msgToSend, '');
+              }
+            }
+          });
+        })
+        .catch((err) => {
+          log.error('Error getting guest Info', err);
+          return new Error(err);
+        });
+
+      return 'Done';
+    } catch (error) {
+      log.error(`Error while creating new guest ${error.message}`);
+      return error;
+    }
+  },
+});
+
+module.exports = { guestInfoCreateOne, guestInfoCreateMany, guestInfoById, guestUpdateById, guestSendMsgToAll };

@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/client/node_modules
 /.pnp
 .pnp.js
 
@@ -9,10 +10,11 @@
 /coverage
 
 # production
-/build
+/client/build
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
@@ -21,41 +23,25 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-build/asset-manifest.json
-build/index.html
-build/service-worker.js
-package-lock.json
-package.json
 public/_redirects
 README.md
 src/components/contact.js
 src/components/header.js
 yarn-error.log
 yarn.lock
-build/asset-manifest.json
-build/index.html
-build/service-worker.js
-package-lock.json
-package.json
+/client/package-lock.json
 README.md
 src/components/contact.js
 yarn-error.log
 yarn.lock
-build/asset-manifest.json
-build/index.html
-build/service-worker.js
 package-lock.json
-package.json
 README.md
 src/components/contact.js
 yarn-error.log
 yarn.lock
 yarn.lock
-build/precache-manifest.5cb1e6f051a40459326ce2afef2d4ec0.js
-build/static/js/2.571ed8f8.chunk.js
-build/static/js/2.571ed8f8.chunk.js.map
-build/static/js/main.23797bea.chunk.js
-build/static/js/main.23797bea.chunk.js.map
-build/asset-manifest.json
-build/index.html
-build/service-worker.js
+build/*
+
+# Local Netlify folder
+.netlify
+package-lock.json
