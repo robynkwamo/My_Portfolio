@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "engines": {
-    "node": "18.x"
+    "node": "16.x"
   },
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --coverage --watchAll=false --colors",
