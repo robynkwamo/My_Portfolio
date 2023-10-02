@@ -196,7 +196,6 @@ const guestUpdateById = GuestInfoTC.addResolver({
             log.error(`ERROR CAUGHT ${err}`);
             return false;
           });
-        log.info('THIS IS THE UPDATED DOC', isUpdated);
         if (!isUpdated) {
           log.info('INFO NOT UPDATED ABORTTING');
           await session.abortTransaction();

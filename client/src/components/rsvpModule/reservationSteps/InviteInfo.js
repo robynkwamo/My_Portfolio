@@ -25,11 +25,11 @@ export default function InviteInfo({
   setHasPlusOne,
 }) {
   const handleAttendanceConfirmation = (e) => {
-    setIsAttending(e.target.value);
+    setIsAttending(JSON.parse(e.target.value));
   };
 
   const handleHasPlusOne = (e) => {
-    setHasPlusOne(e.target.value);
+    setHasPlusOne(JSON.parse(e.target.value));
   };
 
   useEffect(() => {
