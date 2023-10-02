@@ -286,7 +286,7 @@ const guestSendMsgToAll = MessageTC.addResolver({
                 Contact host at 832-928-9281
                 `
 
-                sendMessage(guestList[i].phoneNumber, msgToSend, flyerImg);
+                sendMessage(guestList[i].phoneNumber, msgToSendTemp, flyerImg);
               }
             } else if (messageType === 'AddressUpdate') {
               guestList = guestList.filter((guest) => guest.isAttending === true);
