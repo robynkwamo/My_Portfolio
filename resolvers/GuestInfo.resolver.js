@@ -280,7 +280,7 @@ const guestSendMsgToAll = MessageTC.addResolver({
                   'https://res.cloudinary.com/dov6k0l17/image/upload/v1696117279/Brown_Teddy_Bear_Illustrated_Baby_Shower_Invitation_l4zkdt.jpg';
                 const msgToSend = `Hi ${guestList[i].firstName}, you're invited to ${eventInfo.eventName}. Please confirm you presence here: ${websiteLink}`;
                 const msgToSendTemp =
-                `Hi ${guestList[i].firstName}, We would love for you to join us for a SURPRISE baby shower honoring Armelle and Roby as they await the birth of their little bundle of joy. Please confirm your presense here: ${websiteLink}. Stay tuned for further details \n PS: This is a SURPRISE FOR ARMELLE so please do not reach out to her regarding this. \n Contact host at 832-928-9281`
+                `Hi ${guestList[i].firstName}, we would love for you to join us for a SURPRISE baby shower honoring Armelle and Roby as they await the birth of their little bundle of joy. Please confirm your presense here: ${websiteLink}. Stay tuned for further details! \n PS: This is a SURPRISE FOR ARMELLE so please do not reach out to her regarding this. \n Contact host at 832-928-9281`
 
                 sendMessage(guestList[i].phoneNumber, msgToSendTemp, flyerImg);
               }
