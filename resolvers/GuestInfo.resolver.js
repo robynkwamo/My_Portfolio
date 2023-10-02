@@ -279,6 +279,12 @@ const guestSendMsgToAll = MessageTC.addResolver({
                 const flyerImg =
                   'https://res.cloudinary.com/dov6k0l17/image/upload/v1696117279/Brown_Teddy_Bear_Illustrated_Baby_Shower_Invitation_l4zkdt.jpg';
                 const msgToSend = `Hi ${guestList[i].firstName}, you're invited to ${eventInfo.eventName}. Please confirm you presence here: ${websiteLink}`;
+                const msgToSendTemp = `
+                Hi ${guestList[i].firstName}, We would love for you to join us for a SURPRISE baby shower honoring Armelle and Roby as they await 
+                the birth of their little bundle of joy. Please confirm your presense here: ${websiteLink}. Stay tuned for further details \n
+                PS: This is a SURPRISE FOR ARMELLE so please do not reach out to her regarding this. \n
+                Contact host at 832-928-9281
+                `
 
                 sendMessage(guestList[i].phoneNumber, msgToSend, flyerImg);
               }
@@ -290,7 +296,12 @@ const guestSendMsgToAll = MessageTC.addResolver({
               const eventAddress = `${addressLine1}, ${city}, ${state}, ${zipCode}`;
               for (let i = 0, j = guestList.length; i < j; i++) {
                 const msgToSend = `Hi ${guestList[i].firstName}, thank you for coming to ${eventInfo.eventName}. Here is the address ${eventAddress} and we hope to see you there by 3pm.`;
-                sendMessage(guestList[i].phoneNumber, msgToSend, '');
+                const tempMsgToSend = `
+                Hi ${guestList[i].firstName}, Thank you for confirming your presence at ${eventInfo.eventName}. We are looking forward to celebrating Armelle and Roby
+                with you. Here is the Address to the event {eventAddress}. Please note the start time of 4PM is to be respected as we would love for everyone to be present to surprise Armelle. \n
+                See you there!
+                `
+                sendMessage(guestList[i].phoneNumber, tempMsgToSend, '');
               }
             }
           });
