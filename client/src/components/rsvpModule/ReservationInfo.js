@@ -91,12 +91,12 @@ export default function ReservationInfo() {
               color={'#E8825A'}
               variant="h1"
               gutterBottom
-              fontSize={32}
+              fontSize={26}
               letterSpacing={1}
               fontWeight={300}
               fontFamily={'Croissant One'}
             >
-              Thank Your for responding. We have received your response.
+              Thank Your for responding. The host has received your response and you'll receive more details soon.
             </Typography>
             {backBtn()}
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
