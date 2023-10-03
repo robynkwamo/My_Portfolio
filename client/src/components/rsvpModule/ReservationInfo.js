@@ -11,6 +11,8 @@ import { Paper } from '@mui/material';
 import InviteInfo from './reservationSteps/InviteInfo';
 import { getInviteInfo, guestUpdate } from '../../APIs/reservationApis';
 import { Link } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
 
 const steps = ['RSVP', 'Confirmation'];
 
@@ -62,23 +64,26 @@ export default function ReservationInfo() {
   };
 
   return (
-    <Grid container rowSpacing={5} height={'100%'} backgroundColor={'#F6F6F6'} whiteSpace={0}>
+    <Grid container rowSpacing={1} height={'100vh'} backgroundColor={'#fff'} whiteSpace={0}>
       <Grid item xs={12} maxHeight={100}>
-        <Paper elevation={1} sx={{ paddingY: 2 }}>
-          <Stepper activeStep={activeStep}>
-            {steps.map((label, index) => {
-              const stepProps = {};
-              const labelProps = {};
-              return (
-                <Step key={label} {...stepProps}>
-                  <StepLabel {...labelProps}>{label}</StepLabel>
-                </Step>
-              );
-            })}
-          </Stepper>
-        </Paper>
+        <Header />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} backgroundColor={'#fff'}>
+        <Grid item xs={12} maxHeight={100}>
+          <Paper elevation={1} sx={{ paddingY: 2 }}>
+            <Stepper activeStep={activeStep}>
+              {steps.map((label, index) => {
+                const stepProps = {};
+                const labelProps = {};
+                return (
+                  <Step key={label} {...stepProps}>
+                    <StepLabel {...labelProps}>{label}</StepLabel>
+                  </Step>
+                );
+              })}
+            </Stepper>
+          </Paper>
+        </Grid>
         {activeStep === steps.length - 1 ? (
           <React.Fragment>
             <Typography
@@ -86,12 +91,12 @@ export default function ReservationInfo() {
               color={'#E8825A'}
               variant="h1"
               gutterBottom
-              fontSize={32}
+              fontSize={26}
               letterSpacing={1}
               fontWeight={300}
               fontFamily={'Croissant One'}
             >
-              Thank Your for responding. We have received your response.
+              Thank Your for responding. The host has received your response and you'll receive more details soon.
             </Typography>
             {backBtn()}
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -139,6 +144,9 @@ export default function ReservationInfo() {
             </Alert>
           </Grid>
         )}
+      </Grid>
+      <Grid item xs={12}>
+        <Footer noRsvpBtn={true} />
       </Grid>
     </Grid>
   );

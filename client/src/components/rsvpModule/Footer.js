@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 
-export default function Footer() {
+export default function Footer({ noRsvpBtn }) {
   return (
     <Grid
       container
@@ -36,20 +36,22 @@ export default function Footer() {
         </Typography>
       </Grid>
       <Grid container item xs={12} alignItems={'center'} justifyContent={'center'}>
-        <Grid item container xs={6} justifyContent={'center'}>
+        <Grid item container xs={noRsvpBtn ? 12 : 6} justifyContent={'center'}>
           <a href={'https://www.babylist.com/list/roby-nkwamo'} target="_blank" rel="noopener noreferrer">
             <Button variant="contained" color="secondary">
               The Registry
             </Button>
           </a>
         </Grid>
-        <Grid item container xs={6} justifyContent={'center'}>
-          <Link to={'/armelle&robyshower/rsvp'} style={{ color: '#000' }}>
-            <Button variant="contained" sx={{ backgroundColor: '#60ABAA', color: 'black' }}>
-              RSVP NOW
-            </Button>
-          </Link>
-        </Grid>
+        {!noRsvpBtn && (
+          <Grid item container xs={6} justifyContent={'center'}>
+            <Link to={'/armelle&robyshower/rsvp'} style={{ color: '#000' }}>
+              <Button variant="contained" sx={{ backgroundColor: '#60ABAA', color: 'black' }}>
+                RSVP NOW
+              </Button>
+            </Link>
+          </Grid>
+        )}
       </Grid>
       <Grid item xs={12}>
         <Typography

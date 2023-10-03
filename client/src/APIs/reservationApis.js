@@ -43,21 +43,7 @@ const getInviteInfo = async (phoneNumber, firstName, lastName) => {
 
 const guestUpdate = async (phoneNumber, isAttending, hasPlusOne) => {
   try {
-    let updatedFields = [];
-
-    if (isAttending) {
-      updatedFields = {
-        ...updatedFields,
-        isAttending,
-      };
-    }
-
-    if (hasPlusOne) {
-      updatedFields = {
-        ...updatedFields,
-        hasPlusOne,
-      };
-    }
+    let updatedFields = { isAttending, hasPlusOne };
 
     const data = JSON.stringify({
       query: `mutation ($updatedFields: [JSON]!) {
@@ -82,9 +68,9 @@ const guestUpdate = async (phoneNumber, isAttending, hasPlusOne) => {
     };
 
     return await axios(config).then((response) => {
-      console.log({ response });
+      // console.log({ response });
       if (response?.data?.errors?.length > 0) {
-        return {};
+        return false;
       }
       return response.data.data.guestUpdateById;
     });

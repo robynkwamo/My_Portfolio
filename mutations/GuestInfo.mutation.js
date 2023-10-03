@@ -5,6 +5,7 @@ require('../resolvers/GuestInfo.resolver');
 const GuestInfoMutation = {
   guestInfoCreateOne: GuestInfoTC.getResolver('createOne'),
   guestInfoCreateMany: GuestInfoTC.getResolver('createMany'),
+  guestUpdateById: GuestInfoTC.getResolver('updateGuest'),
   sendUpdateToGuest: MessageTC.getResolver('sendUpdateToAllGuest'),
 };
 
