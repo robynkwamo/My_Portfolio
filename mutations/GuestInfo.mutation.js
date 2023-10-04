@@ -6,7 +6,8 @@ const GuestInfoMutation = {
   guestInfoCreateOne: GuestInfoTC.getResolver('createOne'),
   guestInfoCreateMany: GuestInfoTC.getResolver('createMany'),
   guestUpdateById: GuestInfoTC.getResolver('updateGuest'),
-  sendUpdateToGuest: MessageTC.getResolver('sendUpdateToAllGuest'),
+  sendUpdateToGuest: MessageTC.getResolver('sendUpdateToGuest'),
+  sendUpdateToAllGuests: MessageTC.getResolver('sendUpdateToAllGuests'),
 };
 
 module.exports = {

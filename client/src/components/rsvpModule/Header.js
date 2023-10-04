@@ -18,12 +18,12 @@ export default function Header() {
           color={'#fff'}
           variant="h1"
           gutterBottom
-          fontSize={48}
+          fontSize={42}
           letterSpacing={2.5}
           fontWeight={500}
           fontFamily={'Roboto'}
         >
-          THE NKWAMO
+          THE NKWAMO'S
         </Typography>
       </Grid>
     </Grid>
