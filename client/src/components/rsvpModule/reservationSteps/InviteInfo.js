@@ -21,8 +21,11 @@ export default function InviteInfo({
   inviteInfo,
   isInvited,
   guestNotFound,
+  isAttending,
   setIsAttending,
+  hasPlusOne,
   setHasPlusOne,
+  updateAttendance,
 }) {
   const handleAttendanceConfirmation = (e) => {
     setIsAttending(JSON.parse(e.target.value));
@@ -33,10 +36,10 @@ export default function InviteInfo({
   };
 
   useEffect(() => {
-    if (phoneNumber?.length === 10) {
+    if (phoneNumber?.length === 10 && firstName && lastName) {
       inviteInfo(phoneNumber, firstName, lastName);
     }
-  }, [phoneNumber]);
+  }, [firstName, inviteInfo, lastName, phoneNumber]);
 
   return (
     <Paper
@@ -84,7 +87,7 @@ export default function InviteInfo({
               <FormLabel id="demo-radio-buttons-group-label">Are you able to attend? </FormLabel>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="yes"
+                defaultValue={isAttending}
                 name="radio-buttons-group"
                 onChange={handleAttendanceConfirmation}
               >
@@ -100,7 +103,7 @@ export default function InviteInfo({
               <FormLabel id="demo-radio-buttons-group-label">Are you bringing a +1? </FormLabel>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="no"
+                defaultValue={hasPlusOne}
                 name="radio-buttons-group"
                 onChange={handleHasPlusOne}
               >
@@ -108,6 +111,11 @@ export default function InviteInfo({
                 <FormControlLabel value={false} control={<Radio />} label="No" />
               </RadioGroup>
             </FormControl>
+          </Grid>
+        )}
+        {updateAttendance && (
+          <Grid item container justifyContent={'center'} xs={12}>
+            <Alert severity="info">You've already submitted the form. Would you like to update?</Alert>
           </Grid>
         )}
         {guestNotFound && (

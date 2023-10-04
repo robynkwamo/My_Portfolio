@@ -42,7 +42,7 @@ export default function ReservationModule() {
             fontWeight={300}
             fontFamily={'Croissant One'}
           >
-            It's A Suprise!
+            It's A Surprise!
           </Typography>
         </Item>
         <Item>

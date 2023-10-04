@@ -245,9 +245,83 @@ const guestInfoById = GuestInfoTC.addResolver({
   },
 });
 
-// Send message update
+// Send message update to one guest
+const sendUpdateToGuest = MessageTC.addResolver({
+  name: 'sendUpdateToGuest',
+  kind: 'mutation',
+  type: MessageTC,
+  args: {
+    eventId: 'ID!',
+    messageType: 'String!',
+    phoneNumber: 'String!',
+  },
+  resolve: async ({ args }) => {
+    try {
+      // Get the details of an guests
+      const { sendMessage } = require('../functions/sms');
+      const { eventId, messageType, phoneNumber } = args;
+
+      const guestQuery = {
+        phoneNumber,
+        eventId,
+        isDeleted: false,
+      };
+      const myQuery = {
+        _id: eventId,
+        isDeleted: false,
+      };
+
+      await GuestInfoSchema.find(guestQuery)
+        .then(async (doc) => {
+          console.log({ doc });
+          let guestInfo = doc[0];
+
+          await EventInfoSchema.find(myQuery).then(async (doc) => {
+            // console.log({ doc });
+            const eventInfo = doc[0];
+
+            if (messageType === 'Invitation') {
+              log.info('Sending invitation messages');
+              //   for (let i = 0, j = guestInfo.length; i < j; i++) {
+              const websiteLink = `https://nkwamo.com/${eventInfo.slug}`;
+              const flyerImg =
+                'https://res.cloudinary.com/dov6k0l17/image/upload/v1696117279/Brown_Teddy_Bear_Illustrated_Baby_Shower_Invitation_l4zkdt.jpg';
+              // const msgToSend = `Hi ${guestInfo.firstName}, you're invited to ${eventInfo.eventName}. Please confirm you presence here: ${websiteLink}`;
+              const msgToSendTemp = `Hi ${guestInfo.firstName}, we would love for you to join us for a SURPRISE baby shower, on October 28th from 04pm to 10pm, honoring Armelle and Roby as they await the birth of their little bundle of joy. Please confirm your presense here: ${websiteLink}. Stay tuned for further details! \n PS: This is a SURPRISE FOR ARMELLE so please do not reach out to her regarding this. \nContact host at (856) 946-2824.`;
+
+              sendMessage(guestInfo.phoneNumber, msgToSendTemp, flyerImg);
+              //   }
+            } else if (messageType === 'AddressUpdate') {
+              log.info('Sending address messages');
+              //   guestInfo = guestInfo.filter((guest) => guest.isAttending === true);
+              //   console.log({ guestInfo });
+              const { eventLocation } = eventInfo;
+              const { addressLine1, addressLine2, city, state, zipCode } = eventLocation;
+              const eventAddress = `${addressLine1}, ${city}, ${state}, ${zipCode}`;
+              //   for (let i = 0, j = guestInfo.length; i < j; i++) {
+              // const msgToSend = `Hi ${guestInfo.firstName}, thank you for coming to ${eventInfo.eventName}. Here is the address ${eventAddress} and we hope to see you there by 3pm.`;
+              const tempMsgToSend = `Hi ${guestInfo.firstName}, Thank you for confirming your presence at ${eventInfo.eventName}. We are looking forward to celebrating Armelle and Roby with you. Here is the Address to the event ${eventAddress}. Please note the start time of 4PM is to be respected as we would love for everyone to be present to surprise Armelle. \nSee you there!`;
+              sendMessage(guestInfo.phoneNumber, tempMsgToSend, '');
+              //   }
+            }
+          });
+        })
+        .catch((err) => {
+          log.error('Error getting guest Info', err);
+          return new Error(err);
+        });
+
+      return 'Done';
+    } catch (error) {
+      log.error(`Error while creating new guest ${error.message}`);
+      return error;
+    }
+  },
+});
+
+// Send message update to all guest
 const guestSendMsgToAll = MessageTC.addResolver({
-  name: 'sendUpdateToAllGuest',
+  name: 'sendUpdateToAllGuests',
   kind: 'mutation',
   type: MessageTC,
   args: {
@@ -280,7 +354,7 @@ const guestSendMsgToAll = MessageTC.addResolver({
                 const flyerImg =
                   'https://res.cloudinary.com/dov6k0l17/image/upload/v1696117279/Brown_Teddy_Bear_Illustrated_Baby_Shower_Invitation_l4zkdt.jpg';
                 // const msgToSend = `Hi ${guestList[i].firstName}, you're invited to ${eventInfo.eventName}. Please confirm you presence here: ${websiteLink}`;
-                const msgToSendTemp = `Hi ${guestList[i].firstName}, we would love for you to join us for a SURPRISE baby shower, on October 28th from 04pm to 10pm, honoring Armelle and Roby as they await the birth of their little bundle of joy. Please confirm your presense here: ${websiteLink}. Stay tuned for further details! \n PS: This is a SURPRISE FOR ARMELLE so please do not reach out to her regarding this. \nContact host at (856) 946-2824.`;
+                const msgToSendTemp = `Hi ${guestList[i].firstName}, we would love for you to join us for a SURPRISE baby shower, on October 28th from 04pm to 10pm, honoring Armelle and Roby as they await the birth of their little bundle of joy. Please confirm your presense here: ${websiteLink} . Stay tuned for further details! \n PS: This is a SURPRISE FOR ARMELLE so please do not reach out to her regarding this. \nContact host at (856) 946-2824.`;
 
                 sendMessage(guestList[i].phoneNumber, msgToSendTemp, flyerImg);
               }
@@ -312,4 +386,11 @@ const guestSendMsgToAll = MessageTC.addResolver({
   },
 });
 
-module.exports = { guestInfoCreateOne, guestInfoCreateMany, guestInfoById, guestUpdateById, guestSendMsgToAll };
+module.exports = {
+  guestInfoCreateOne,
+  guestInfoCreateMany,
+  guestInfoById,
+  guestUpdateById,
+  guestSendMsgToAll,
+  sendUpdateToGuest,
+};

@@ -21,20 +21,21 @@ export default function ReservationInfo() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState();
-  const [isAttending, setIsAttending] = useState(true);
+  const [isAttending, setIsAttending] = useState();
   const [canHavePlusOne, setCanHavePlusOne] = useState(false);
-  const [hasPlusOne, setHasPlusOne] = useState(false);
+  const [hasPlusOne, setHasPlusOne] = useState();
   const [isInvited, setIsInvited] = useState(false);
   const [guestNotFound, setGuestNotFound] = useState(false);
-  const [submissionError, setsubmissionError] = useState(false);
+  const [submissionError, setSubmissionError] = useState(false);
+  const [updateAttendance, setUpdateAttendance] = useState(false);
 
   const onConfirmingAttendance = async () => {
     await guestUpdate(phoneNumber, isAttending, hasPlusOne).then((res) => {
       if (res) {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        setsubmissionError(false);
+        setSubmissionError(false);
       } else {
-        setsubmissionError(true);
+        setSubmissionError(true);
       }
     });
   };
@@ -42,11 +43,17 @@ export default function ReservationInfo() {
   const inviteInfo = async (phoneNumber, firstName, lastName) => {
     await getInviteInfo(phoneNumber, firstName, lastName).then((res) => {
       if (res) {
-        const { firstName, isDeleted, eventId } = res;
+        const { firstName, isDeleted, eventId, isAttending } = res;
         if (!isDeleted && eventId && firstName) {
           setCanHavePlusOne(res.canHavePlusOne);
           setGuestNotFound(false);
           setIsInvited(true);
+          // setIsAttending(isAttending);
+          if (isAttending) {
+            setUpdateAttendance(true);
+          } else {
+            setUpdateAttendance(false);
+          }
         }
       } else {
         setIsInvited(false);
@@ -121,6 +128,7 @@ export default function ReservationInfo() {
                 inviteInfo={inviteInfo}
                 isInvited={isInvited}
                 guestNotFound={guestNotFound}
+                updateAttendance={updateAttendance}
               />
             )}
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -128,7 +136,7 @@ export default function ReservationInfo() {
               <Box sx={{ flex: '1 1 auto' }} />
               <Button
                 onClick={onConfirmingAttendance}
-                disabled={!isInvited || !firstName || !lastName}
+                disabled={!isInvited || !firstName || !lastName || (isAttending !== true && isAttending !== false)}
                 variant="contained"
               >
                 Confirm
@@ -140,7 +148,7 @@ export default function ReservationInfo() {
         {submissionError && (
           <Grid item container justifyContent={'center'} xs={12}>
             <Alert severity="error">
-              Sorry There was an error submitting your response. Please try again or contact host.{' '}
+              Sorry There was an error submitting your response. Please try again or contact host.
             </Alert>
           </Grid>
         )}
