@@ -148,11 +148,14 @@ const guestUpdateById = GuestInfoTC.addResolver({
   args: {
     phoneNumber: 'String!',
     updatedField: '[JSON]!',
+    eventId: 'ID',
   },
   resolve: async ({ args }) => {
     try {
       const { phoneNumber, updatedField } = args;
       const allowedFields = ['phoneNumber'];
+      log.info('Guest updated the invite: ', phoneNumber);
+      updatedField.push({ hasResponded: true });
       updatedField.forEach((field) => {
         for (const key in field) {
           if (!allowedFields.includes(key)) {
@@ -340,12 +343,12 @@ const guestSendMsgToAll = MessageTC.addResolver({
 
       await GuestInfoSchema.find(myQuery)
         .then(async (doc) => {
-          console.log({ doc });
           let guestList = doc;
+          log.info('Guests list: ', guestList);
 
           await EventInfoSchema.find({ _id: eventId }).then(async (doc) => {
-            // console.log({ doc });
             const eventInfo = doc[0];
+            log.info('Event info details: ', eventInfo);
 
             if (messageType === 'Invitation') {
               log.info('Sending invitation messages');
