@@ -276,7 +276,7 @@ const sendUpdateToGuest = MessageTC.addResolver({
 
       await GuestInfoSchema.find(guestQuery)
         .then(async (doc) => {
-          console.log({ doc });
+          //   console.log({ doc });
           let guestInfo = doc[0];
 
           await EventInfoSchema.find(myQuery).then(async (doc) => {
@@ -349,11 +349,11 @@ const guestSendMsgToAll = MessageTC.addResolver({
           await EventInfoSchema.find({ _id: eventId }).then(async (doc) => {
             const eventInfo = doc[0];
             log.info('Event info details: ', eventInfo);
+            const websiteLink = `https://nkwamo.com/${eventInfo.slug}`;
 
             if (messageType === 'Invitation') {
               log.info('Sending invitation messages');
               for (let i = 0, j = guestList.length; i < j; i++) {
-                const websiteLink = `https://nkwamo.com/${eventInfo.slug}`;
                 const flyerImg =
                   'https://res.cloudinary.com/dov6k0l17/image/upload/v1696117279/Brown_Teddy_Bear_Illustrated_Baby_Shower_Invitation_l4zkdt.jpg';
                 // const msgToSend = `Hi ${guestList[i].firstName}, you're invited to ${eventInfo.eventName}. Please confirm you presence here: ${websiteLink}`;
@@ -369,8 +369,15 @@ const guestSendMsgToAll = MessageTC.addResolver({
               const { addressLine1, addressLine2, city, state, zipCode } = eventLocation;
               const eventAddress = `${addressLine1}, ${city}, ${state}, ${zipCode}`;
               for (let i = 0, j = guestList.length; i < j; i++) {
-                const msgToSend = `Hi ${guestList[i].firstName}, thank you for coming to ${eventInfo.eventName}. Here is the address ${eventAddress} and we hope to see you there by 3pm.`;
                 const tempMsgToSend = `Hi ${guestList[i].firstName}, Thank you for confirming your presence at ${eventInfo.eventName}. We are looking forward to celebrating Armelle and Roby with you. Here is the Address to the event ${eventAddress}. Please note the start time of 4PM is to be respected as we would love for everyone to be present to surprise Armelle. \n See you there!`;
+                sendMessage(guestList[i].phoneNumber, tempMsgToSend, '');
+              }
+            } else if (messageType === 'rsvpReminder') {
+              log.info('Sending rsvp reminder messages');
+              guestList = guestList.filter((guest) => guest.hasResponded === false);
+              log.info('Guests with no RSVP', guestList);
+              for (let i = 0, j = guestList.length; i < j; i++) {
+                const tempMsgToSend = `Hi ${guestList[i].firstName}, we have noticed that you have not RSVPed yet for Armelle's SURPRISE baby shower on October 28th. This is a friendly reminder to Please confirm your presence BY OCTOBER 14TH here: ${websiteLink} . \nThank you!`;
                 sendMessage(guestList[i].phoneNumber, tempMsgToSend, '');
               }
             }
