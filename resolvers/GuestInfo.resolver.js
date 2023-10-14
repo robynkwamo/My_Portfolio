@@ -377,7 +377,7 @@ const guestSendMsgToAll = MessageTC.addResolver({
               guestList = guestList.filter((guest) => guest.hasResponded === false);
               log.info('Guests with no RSVP', guestList);
               for (let i = 0, j = guestList.length; i < j; i++) {
-                const tempMsgToSend = `Hi ${guestList[i].firstName}, we have noticed that you have not RSVPed yet for Armelle's SURPRISE baby shower on October 28th. This is a friendly reminder to Please confirm your presence BY OCTOBER 14TH here: ${websiteLink} . \nThank you!`;
+                const tempMsgToSend = `Hi ${guestList[i].firstName}, we have noticed that you have not RSVPed yet for Armelle's SURPRISE baby shower on October 28th. This is a friendly reminder to Please confirm your presence BY OCTOBER 15TH here: ${websiteLink} . \nThank you!`;
                 sendMessage(guestList[i].phoneNumber, tempMsgToSend, '');
               }
             }
