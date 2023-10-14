@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import Alert from '@mui/material/Alert';
+import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Typography from '@mui/material/Typography';
@@ -113,6 +115,15 @@ export default function InviteInfo({
             </FormControl>
           </Grid>
         )}
+        <Grid item container marginX={6} xs={12}>
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox checked={true} />}
+              label="Receive text message notification about the event."
+              onChange={() => console.log('Agreing to receive msg')}
+            />
+          </FormGroup>
+        </Grid>
         {updateAttendance && (
           <Grid item container justifyContent={'center'} xs={12}>
             <Alert severity="info">You've already submitted the form. Would you like to update?</Alert>
