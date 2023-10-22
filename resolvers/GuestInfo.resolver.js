@@ -282,6 +282,7 @@ const sendUpdateToGuest = MessageTC.addResolver({
           await EventInfoSchema.find(myQuery).then(async (doc) => {
             // console.log({ doc });
             const eventInfo = doc[0];
+            log.info('Event details', eventInfo);
 
             if (messageType === 'Invitation') {
               log.info('Sending invitation messages');
@@ -363,7 +364,7 @@ const guestSendMsgToAll = MessageTC.addResolver({
               }
             } else if (messageType === 'AddressUpdate') {
               log.info('Sending address messages');
-              guestList = guestList.filter((guest) => guest.isAttending === true);
+              guestList = guestList.filter((guest) => guest.willReceiveUpdate === true);
               console.log({ guestList });
               const { eventLocation } = eventInfo;
               const { addressLine1, addressLine2, city, state, zipCode } = eventLocation;
