@@ -282,6 +282,7 @@ const sendUpdateToGuest = MessageTC.addResolver({
           await EventInfoSchema.find(myQuery).then(async (doc) => {
             // console.log({ doc });
             const eventInfo = doc[0];
+            log.info('Event details', eventInfo);
 
             if (messageType === 'Invitation') {
               log.info('Sending invitation messages');
@@ -363,7 +364,7 @@ const guestSendMsgToAll = MessageTC.addResolver({
               }
             } else if (messageType === 'AddressUpdate') {
               log.info('Sending address messages');
-              guestList = guestList.filter((guest) => guest.isAttending === true);
+              guestList = guestList.filter((guest) => guest.willReceiveUpdate === true);
               console.log({ guestList });
               const { eventLocation } = eventInfo;
               const { addressLine1, addressLine2, city, state, zipCode } = eventLocation;
@@ -377,7 +378,7 @@ const guestSendMsgToAll = MessageTC.addResolver({
               guestList = guestList.filter((guest) => guest.hasResponded === false);
               log.info('Guests with no RSVP', guestList);
               for (let i = 0, j = guestList.length; i < j; i++) {
-                const tempMsgToSend = `Hi ${guestList[i].firstName}, we have noticed that you have not RSVPed yet for Armelle's SURPRISE baby shower on October 28th. This is a friendly reminder to Please confirm your presence BY OCTOBER 14TH here: ${websiteLink} . \nThank you!`;
+                const tempMsgToSend = `Hi ${guestList[i].firstName}, we have noticed that you have not RSVPed yet for Armelle's SURPRISE baby shower on October 28th. This is a friendly reminder to Please confirm your presence BY OCTOBER 15TH here: ${websiteLink} . \nThank you!`;
                 sendMessage(guestList[i].phoneNumber, tempMsgToSend, '');
               }
             }

@@ -13,6 +13,7 @@ const guestInfo = new Schema(
     canHavePlusOne: { type: Boolean, default: false, required: false },
     hasPlusOne: { type: Boolean, default: false, required: false },
     hasResponded: { type: Boolean, default: false, required: false },
+    willReceiveUpdate: { type: Boolean, default: false, required: false },
     isDeleted: { type: Boolean, default: false, required: false },
     eventId: {
       type: mongoose.Schema.Types.ObjectId,
